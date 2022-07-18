@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+<body>
+	<h1 th:text="${title}"></h1>
+	<hr>
+	<ul th:each="entry: ${entries}">
+		<li><img width="100" height="100" th:src="${entry.link}"></li>
+		<li><b>Título: </b><a th:href="${entry.link}" th:text="${entry.title}"></a></li>
+		<li><b>Descripción: </b><span th:utext="${entry.description}"></span></li>
+		<li><b>Fecha publicación: </b><span th:text="${entry.pubDate}"></span></li>
+		<li><b>Category: </b><span th:text="${entry.category}"></span></li>
+	</ul>
+</body>
+</html>

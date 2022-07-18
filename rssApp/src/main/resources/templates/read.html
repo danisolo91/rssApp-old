@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+<body>
+	<h1 th:text="${title}"></h1>
+	<hr>
+	<div th:if="${error}" th:text="${error}"></div>
+	<div th:if="${feed != null}">
+		<h3 th:text="${feed.name}"></h3>
+		<ul th:each="item: ${feed.items}">
+			<li><b>Imagen: </b><img width="100" height="100" th:src="${item.image}"/></li>
+			<li><b>Título: </b><a th:href="${item.link}" th:text="${item.title}"></a></li>
+			<li><b>Descripción: </b><span th:utext="${item.description}"></span></li>
+			<li><b>Fecha publicación: </b><span th:text="${item.publishDate}"></span></li>
+		</ul>
+	</div>
+</body>
+</html>
