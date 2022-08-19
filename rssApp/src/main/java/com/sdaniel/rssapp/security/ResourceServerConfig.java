@@ -36,11 +36,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/users").permitAll() // para registrar usuarios
 		.antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN") // para ver todos los usuarios
 		.antMatchers("/users/**").hasAnyRole("ADMIN", "USER") // para ver detalles/actualizar/eliminar...acciones de los usuarios (suscribe,like,comment,desuscribe...)
-		.antMatchers(HttpMethod.POST, "/feeds").hasAnyRole("ADMIN", "USER") // para crear un feed
-		.antMatchers(HttpMethod.GET, "/feeds/**").hasRole("ADMIN") // ver todos los feeds/actualizar manualmente
+		.antMatchers(HttpMethod.POST, "/feeds").permitAll() // para crear un feed
+		.antMatchers(HttpMethod.GET, "/feeds/**").permitAll() // ver todos los feeds/actualizar manualmente
 		.antMatchers(HttpMethod.DELETE, "/feeds/**").hasRole("ADMIN") // solo el ADMIN puede eliminar feeds de la BD, el usuario solo se puede desuscribir
-		.antMatchers(HttpMethod.GET, "/items/**").hasAnyRole("ADMIN", "USER") // ver los items de un feed en concreto
 		.antMatchers(HttpMethod.GET, "/items").permitAll() // ver todos los items (portada)
+		.antMatchers(HttpMethod.GET, "/items/**").hasAnyRole("ADMIN", "USER") // ver los items de un feed en concreto
 		.anyRequest().authenticated() // cualquier otra ruta requiere autenticacion
 		.and().cors().configurationSource(configurationSource()) // configuramos CORS para Spring Security
 		;
